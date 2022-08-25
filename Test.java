@@ -1,8 +1,15 @@
+import java.util.*;
+
 public class Test {
 
     public static void main(String[] args) {
-        String x = args[0];
-        String y = args[1];
+        Scanner sc = new Scanner(System.in);
+        String[] ar = {};
+        //String x = args[0];
+        //String y = args[1];
+
+        String x = sc.nextLine();
+        String y = sc.nextLine();
 
         int n = Math.max(x.length(), y.length());
 
@@ -59,7 +66,7 @@ public class Test {
 
 
             String x0y0, x0y1, x0y2, x1y0, x1y1, x1y2, x2y0, x2y1, x2y2;
-            x0y0 = rightZero(karatsubaW3(x0, y0), twoThird);
+            x0y0 = rightZero(karatsubaW3(x0, y0), 2 * twoThird);
             x0y1 = rightZero(karatsubaW3(x0, y1), twoThird + third);
             x0y2 = rightZero(karatsubaW3(x0, y2), twoThird);
             x1y0 = rightZero(karatsubaW3(x1, y0), twoThird+third);
@@ -70,18 +77,36 @@ public class Test {
             x2y2 = karatsubaW3(x2, y2);
             // repete o processo com o resto das variaveis (total dão 9)
 
-            int soma =
-                    Integer.parseInt(x0y0)  +
-                    Integer.parseInt(x0y1)  +
-                    Integer.parseInt(x0y2)  +
-                    Integer.parseInt(x1y0)  +
-                    Integer.parseInt(x1y1)  +
-                    Integer.parseInt(x1y2)  +
-                    Integer.parseInt(x2y0)  +
-                    Integer.parseInt(x2y1)  +
-                    Integer.parseInt(x2y2);
-            return String.valueOf(soma);
+            
+            return add(x0y0, add(x1y0, add(x2y0, add(x0y1, add(x1y1, add(x2y1, add(x0y2, add(x1y2, x2y2))))))));
 
         }
+    }
+
+    //adding two string numbers
+    public static String add(String x, String y) {
+        int n = Math.max(x.length(), y.length());
+        while (x.length() < n) {
+            x = "0" + x;
+        }
+        while (y.length() < n) {
+            y = "0" + y;
+        }
+        String result = "";
+        int carry = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            int sum = (carry + Integer.parseInt(x.charAt(i) + "")) + Integer.parseInt(y.charAt(i) + "");
+            if (sum > 9) {
+                carry = 1;
+                result = sum % 10 + result;
+            } else {
+                carry = 0;
+                result = sum + result;
+            }
+        }
+        if (carry == 1) {
+            result = "1" + result;
+        }
+        return result;
     }
 }
