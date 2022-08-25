@@ -28,6 +28,17 @@ public class Test {
         return x;
     }
 
+    public static String rightZero(String x, int zeros){
+        int aux = 0;
+
+        while(aux != zeros){
+            x = x+"0";
+            aux++;
+        }
+
+        return x;
+    }
+
     public static String karatsubaW3 (String x, String y) {
 
         if(x.length() ==1 || y.length()==1) {
@@ -48,26 +59,26 @@ public class Test {
 
 
             String x0y0, x0y1, x0y2, x1y0, x1y1, x1y2, x2y0, x2y1, x2y2;
-            x0y0 = leadingZero(karatsubaW3(x0, y0));
-            x0y1 = leadingZero(karatsubaW3(x0, y1));
-            x0y2 = leadingZero(karatsubaW3(x0, y2));
-            x1y0 = leadingZero(karatsubaW3(x1, y0));
-            x1y1 = leadingZero(karatsubaW3(x1, y1));
-            x1y2 = leadingZero(karatsubaW3(x1, y2));
-            x2y0 = leadingZero(karatsubaW3(x2, y0));
-            x2y1 = leadingZero(karatsubaW3(x2, y1));
-            x2y2 = leadingZero(karatsubaW3(x2, y2));
+            x0y0 = rightZero(karatsubaW3(x0, y0), twoThird);
+            x0y1 = rightZero(karatsubaW3(x0, y1), twoThird + third);
+            x0y2 = rightZero(karatsubaW3(x0, y2), twoThird);
+            x1y0 = rightZero(karatsubaW3(x1, y0), twoThird+third);
+            x1y1 = rightZero(karatsubaW3(x1, y1), third+third);
+            x1y2 = rightZero(karatsubaW3(x1, y2), third);
+            x2y0 = rightZero(karatsubaW3(x2, y0), twoThird);
+            x2y1 = rightZero(karatsubaW3(x2, y1), third);
+            x2y2 = karatsubaW3(x2, y2);
             // repete o processo com o resto das variaveis (total dão 9)
 
             int soma =
-                    Integer.parseInt(x0y0) * (int) Math.pow(10, twoThird+twoThird) +
-                    Integer.parseInt(x0y1) * (int) Math.pow(10, twoThird+third)+
-                    Integer.parseInt(x0y2) * (int) Math.pow(10, twoThird)+
-                    Integer.parseInt(x1y0) * (int) Math.pow(10, third+twoThird)+
-                    Integer.parseInt(x1y1) * (int) Math.pow(10, third+third)+
-                    Integer.parseInt(x1y2) * (int) Math.pow(10, third)+
-                    Integer.parseInt(x2y0) * (int) Math.pow(10, twoThird)+
-                    Integer.parseInt(x2y1) * (int) Math.pow(10, third)+
+                    Integer.parseInt(x0y0)  +
+                    Integer.parseInt(x0y1)  +
+                    Integer.parseInt(x0y2)  +
+                    Integer.parseInt(x1y0)  +
+                    Integer.parseInt(x1y1)  +
+                    Integer.parseInt(x1y2)  +
+                    Integer.parseInt(x2y0)  +
+                    Integer.parseInt(x2y1)  +
                     Integer.parseInt(x2y2);
             return String.valueOf(soma);
 
